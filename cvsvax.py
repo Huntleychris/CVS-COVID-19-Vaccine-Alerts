@@ -5,6 +5,7 @@ Created on Wed Mar  3 15:21:04 2021
 
 @author: cabrown802
 """
+#if you're using gmail 2 factor use an app password https://support.google.com/accounts/answer/185833?hl=en 
 
 import urllib.request
 import threading
@@ -39,8 +40,8 @@ def sendit():
     html = urllib.request.urlopen('https://www.cvs.com/immunizations/covid-19-vaccine').read()
     
     # If not all appointments are booked...
-    lookforstring = f"At this time, all appointments in {state} are booked."
-    if lookforstring.encode() not in html:
+    lookforstring = f"Schedule an appointment now"
+    if lookforstring.encode() in html:
         
         # Login via STMP and send email
         with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
